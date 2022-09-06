@@ -1,11 +1,13 @@
+import datetime
+from django.contrib import admin
 from django.db import models
+from django.utils import timezone
 
-"""class ModelBase:
-    base_Character = []
+class List(models.Model):
+    stats = models.CharField(max_length=100000)
     pub_data = models.DateTimeField('date published')
-
     @admin.display(
-        boolean=True,
+        boolean =True,
         ordering='pub_date',
         description='Published recently?',
     )
@@ -13,22 +15,9 @@ from django.db import models
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_data <= now
 
-    def __str__(self):
-        return self.base_Character"""
-
-
-class Character(models.Model):
-    name = models.CharField(max_length=100000)
-    description = models.TextField(max_length=100000)
-
-    def __str__(self):
-        return self.name
-
-
-"""class Roster(models.Model):
+class Roster:
     group = []
     pub_data = models.DateTimeField('date published')
-
     @admin.display(
         boolean=True,
         ordering='pub_date',
@@ -38,12 +27,11 @@ class Character(models.Model):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_data <= now
 
-    def __str__(self):
-        return self.group
 
 class Append(models.Model):
     questionOfRoster = models.ForeignKey(Roster, on_delete=models.CASCADE)
     NameOfSolder = models.CharField(max_length=200)
 
+
     def __str__(self):
-        return self.questionOfRoster, self.NameOfSolder"""
+        return self.questionOfRoster, self.NameOfSolder

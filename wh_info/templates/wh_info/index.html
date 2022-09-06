@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+{% if character_list %}
+    <ul>
+        {% for char in character_list%}
+        <li>{{ char.name }}</li>
+        {% endfor%}
+    </ul>
+{% else %}
+    <p>No wh_info are available.</p>
+{% endif %}
+</body>
+</html>
