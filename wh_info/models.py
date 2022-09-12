@@ -20,6 +20,28 @@ from django.db import models
 class Character(models.Model):
     name = models.CharField(max_length=100000)
     description = models.TextField(max_length=100000)
+    battlefield_role = models.CharField(max_length=100000)
+    power_rating = models.CharField(max_length=100000)
+    unit_composition = models.CharField(max_length=100000)
+    wargear = models.TextField(max_length=100000)
+    abilities = models.TextField(max_length=100000)
+    faction_keywords = models.TextField(max_length=100000)
+    keywors = models.TextField(max_length=100000)
+    weapons = models.TextField(max_length=100000)
+    profile = models.TextField(max_length=100000)
+
+    def __str__(self):
+        return self.name
+
+
+class Weapon(models.Model):
+    name = models.CharField(max_length=100000)
+    range = models.CharField(max_length=100000)
+    type = models.CharField(max_length=100000)
+    strength = models.CharField(max_length=100000)
+    armor_penetration = models.CharField(max_length=100000)
+    damage = models.CharField(max_length=100000)
+    abilities = models.TextField(max_length=100000)
 
     def __str__(self):
         return self.name
