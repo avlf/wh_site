@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 """class ModelBase:
     base_Character = []
@@ -18,30 +19,33 @@ from django.db import models
 
 
 class Character(models.Model):
-    name = models.CharField(max_length=100000)
-    description = models.TextField(max_length=100000)
-    battlefield_role = models.CharField(max_length=100000)
-    power_rating = models.CharField(max_length=100000)
-    unit_composition = models.CharField(max_length=100000)
-    wargear = models.TextField(max_length=100000)
-    abilities = models.TextField(max_length=100000)
-    faction_keywords = models.TextField(max_length=100000)
-    keywors = models.TextField(max_length=100000)
-    weapons = models.TextField(max_length=100000)
-    profile = models.TextField(max_length=100000)
+    name = models.CharField(max_length=100)
+    description = models.TextField(max_length=1000, blank=True)
+    battlefield_role = models.CharField(max_length=100, blank=True)
+    power_rating = models.CharField(max_length=100, blank=True)
+    unit_composition = models.CharField(max_length=100, blank=True)
+    wargear = models.TextField(max_length=100, blank=True)
+    abilities = models.TextField(max_length=100, blank=True)
+    faction_keywords = models.TextField(max_length=100, blank=True)
+    keywors = models.TextField(max_length=100, blank=True)
+    weapons = models.TextField(max_length=100, blank=True)
+    profile = models.TextField(max_length=100, blank=True)
 
     def __str__(self):
         return self.name
 
+    '''def get_absolut_url(self):
+        return reverse('character', args=[self.pk])'''
+
 
 class Weapon(models.Model):
-    name = models.CharField(max_length=100000)
-    range = models.CharField(max_length=100000)
-    type = models.CharField(max_length=100000)
-    strength = models.CharField(max_length=100000)
-    armor_penetration = models.CharField(max_length=100000)
-    damage = models.CharField(max_length=100000)
-    abilities = models.TextField(max_length=100000)
+    name = models.CharField(max_length=100)
+    range = models.CharField(max_length=100, blank=True)
+    type = models.CharField(max_length=100, blank=True)
+    strength = models.CharField(max_length=100, blank=True)
+    armor_penetration = models.CharField(max_length=100, blank=True)
+    damage = models.CharField(max_length=100, blank=True)
+    abilities = models.TextField(max_length=100, blank=True)
 
     def __str__(self):
         return self.name

@@ -8,7 +8,7 @@
 {% if character_list %}
     <ul>
         {% for char in character_list%}
-        <li>{{ char.name }}</li>
+        <li><a href="{% url 'wh_info:character' character.id %}">{{ char.id }}</a></li>
         {% endfor%}
     </ul>
 {% else %}
