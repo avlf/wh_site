@@ -5,10 +5,10 @@
     <title>index</title>
 </head>
 <body>
-{% if character_list %}
+{% if weapon_list %}
     <ul>
-        {% for char in character_list%}
-        <li><a href="{% url 'wh_info:character' char.id %}">{{ char.name }}</a></li>
+        {% for wp in weapon_list%}
+        <li><a href="{% url 'wh_info:weapon' wp.id %}">{{ wp.name }}</a></li>
         {% endfor%}
     </ul>
 {% else %}

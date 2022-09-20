@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Character, Weapon
+from .models import Character, Weapon,Roster
 
 
 class CharacterAdmin(admin.ModelAdmin):
@@ -19,14 +19,9 @@ class WeaponAdmin(admin.ModelAdmin):
     list_display = ('name', 'range', 'type', 'strength', 'armor_penetration', 'damage', 'abilities')
 
 
-'''class RosterAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (None, {'fields': ['stats']}),
-        ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
-    ]
-    list_display = ('group', 'pub_date', 'was_published_recently')'''
+class RosterAdmin(admin.ModelAdmin):
+    list_display = ('character','troops','elite','fast_attack','heavy_support')
 
 admin.site.register(Character, CharacterAdmin)
 admin.site.register(Weapon, WeaponAdmin)
-
-# admin.site.register(Roster,RosterAdmin)
+admin.site.register(Roster,RosterAdmin)

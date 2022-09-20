@@ -5,7 +5,10 @@ from . import views
 app_name = 'wh_info'
 
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='index'),
-    path('character/', views.CharacterView.as_view(), name='character'),
+    path('character_list/', views.IndexView.as_view(), name='index1'),
+    path('character/<int:pk>', views.CharacterView.as_view(), name='character'),
+    path('weapon_list/', views.IndexView2.as_view(), name='index2'),
+    path('weapon/<int:pk>',views.WeaponView.as_view(), name='weapon'),
+
 
 ]

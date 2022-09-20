@@ -1,5 +1,6 @@
 from django.db import models
-from django.urls import reverse
+
+from wh_info.constants import BATTLEFIELD_ROLE_CHOICE
 
 """class ModelBase:
     base_Character = []
@@ -21,7 +22,7 @@ from django.urls import reverse
 class Character(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(max_length=1000, blank=True)
-    battlefield_role = models.CharField(max_length=100, blank=True)
+    battlefield_role = models.CharField(max_length=100, choices=BATTLEFIELD_ROLE_CHOICE)
     power_rating = models.CharField(max_length=100, blank=True)
     unit_composition = models.CharField(max_length=100, blank=True)
     wargear = models.TextField(max_length=100, blank=True)
@@ -51,25 +52,44 @@ class Weapon(models.Model):
         return self.name
 
 
-"""class Roster(models.Model):
-    group = []
-    pub_data = models.DateTimeField('date published')
-
-    @admin.display(
-        boolean=True,
-        ordering='pub_date',
-        description='Published recently?',
+class Roster(models.Model):
+    character = models.ForeignKey(
+        Character,
+        related_name='chars',
+        related_query_name='char',
+        on_delete=models.CASCADE,
+        limit_choices_to={'battlefield_role':'commander'},
+        null=True
     )
-    def was_published_recently(self):
-        now = timezone.now()
-        return now - datetime.timedelta(days=1) <= self.pub_data <= now
-
-    def __str__(self):
-        return self.group
-
-class Append(models.Model):
-    questionOfRoster = models.ForeignKey(Roster, on_delete=models.CASCADE)
-    NameOfSolder = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.questionOfRoster, self.NameOfSolder"""
+    troops = models.ForeignKey(
+        Character,
+        related_name='troops',
+        related_query_name='troop',
+        on_delete=models.CASCADE,
+        limit_choices_to={'battlefield_role':'troops'},
+        null=True
+    )
+    elite = models.ForeignKey(
+        Character,
+        related_name='elites',
+        related_query_name='elite',
+        on_delete=models.CASCADE,
+        limit_choices_to={'battlefield_role': 'elite'},
+        null=True
+    )
+    fast_attack = models.ForeignKey(
+        Character,
+        related_name='fast_attacks',
+        related_query_name='fast_attack',
+        on_delete=models.CASCADE,
+        limit_choices_to={'battlefield_role': 'fast_attack'},
+        null=True
+    )
+    heavy_support = models.ForeignKey(
+        Character,
+        related_name='heavy_supports',
+        related_query_name='heavy_support',
+        on_delete=models.CASCADE,
+        limit_choices_to={'battlefield_role': 'heavy_support'},
+        null=True
+    )
