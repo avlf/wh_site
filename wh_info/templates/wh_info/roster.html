@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>roster</title>
+</head>
+<body>
+  {% if roster_list %}
+    <ul>
+        {% for char in roster_list%}
+        <li><a href="{% url 'wh_info:roster' char.id %}">{{ roster.name }}</a></li>
+        {% endfor%}
+    </ul>
+{% else %}
+    <p>No wh_info are available.</p>
+{% endif %}
+
+</body>
+</html>

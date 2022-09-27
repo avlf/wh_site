@@ -24,6 +24,17 @@ class Character(models.Model):
     description = models.TextField(max_length=1000, blank=True)
     battlefield_role = models.CharField(max_length=100, choices=BATTLEFIELD_ROLE_CHOICE)
     power_rating = models.CharField(max_length=100, blank=True)
+    cost = models.CharField(max_length=100, blank=True)
+    movement = models.CharField(max_length=100, blank=True)
+    weapon_skill = models.CharField(max_length=100, blank=True)
+    ballistic_skill = models.CharField(max_length=100, blank=True)
+    streath = models.CharField(max_length=100, blank=True)
+    tenesity = models.CharField(max_length=100, blank=True)
+    wd = models.CharField(max_length=100, blank=True)
+    leader = models.CharField(max_length=100, blank=True)
+    attack = models.CharField(max_length=100, blank=True)
+    spas_roll = models.CharField(max_length=100, blank=True)
+
     unit_composition = models.CharField(max_length=100, blank=True)
     wargear = models.TextField(max_length=100, blank=True)
     abilities = models.TextField(max_length=100, blank=True)
@@ -53,43 +64,44 @@ class Weapon(models.Model):
 
 
 class Roster(models.Model):
-    character = models.ForeignKey(
+    char_list = Character.objects.filter(battlefield_role='character')
+    character = models.ManyToManyField(
         Character,
         related_name='chars',
-        related_query_name='char',
-        on_delete=models.CASCADE,
-        limit_choices_to={'battlefield_role':'commander'},
-        null=True
+        related_query_name=char_list
     )
-    troops = models.ForeignKey(
+    troops = models.ManyToManyField(
         Character,
         related_name='troops',
-        related_query_name='troop',
-        on_delete=models.CASCADE,
-        limit_choices_to={'battlefield_role':'troops'},
-        null=True
+
     )
-    elite = models.ForeignKey(
+    elite = models.ManyToManyField(
         Character,
         related_name='elites',
-        related_query_name='elite',
-        on_delete=models.CASCADE,
-        limit_choices_to={'battlefield_role': 'elite'},
-        null=True
+
     )
-    fast_attack = models.ForeignKey(
+    fast_attack = models.ManyToManyField(
         Character,
         related_name='fast_attacks',
-        related_query_name='fast_attack',
-        on_delete=models.CASCADE,
-        limit_choices_to={'battlefield_role': 'fast_attack'},
-        null=True
+
     )
-    heavy_support = models.ForeignKey(
+    heavy_support = models.ManyToManyField(
         Character,
         related_name='heavy_supports',
-        related_query_name='heavy_support',
-        on_delete=models.CASCADE,
-        limit_choices_to={'battlefield_role': 'heavy_support'},
-        null=True
+
+    )
+    flyers = models.ManyToManyField(
+        Character,
+        related_name='flyers',
+
+    )
+    dedicated_transport = models.ManyToManyField(
+        Character,
+        related_name='dedicated_transport',
+
+    )
+    lords_of_war = models.ManyToManyField(
+        Character,
+        related_name='lords_of_war',
+
     )

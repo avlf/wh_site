@@ -4,5 +4,9 @@ BATTLEFIELD_ROLE_CHOICE=(
     ('elite','Элита'),
     ('fast_attack','Отраяды быстрой атаки'),
     ('heavy_support','Тяжелая поддержка'),
+    ('flyers','Летающая техника'),
+    ('dedicated Transport','Выделеная техника'),
+    ('lords of War','Владыки войны'),
+
 
 )

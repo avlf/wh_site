@@ -1,7 +1,8 @@
+from django.shortcuts import render
 from django.views import generic
 from django.views.generic import DetailView
 
-from .models import Character, Weapon
+from .models import Character, Weapon, Roster
 
 
 class IndexView(generic.ListView):
@@ -11,12 +12,21 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Character.objects.all()
 
+
 class IndexView2(generic.ListView):
     template_name = 'wh_info/index2.html'
     context_object_name = 'weapon_list'
 
     def get_queryset(self):
         return Weapon.objects.all()
+
+
+class IndexView3(generic.ListView):
+    template_name = 'wh_info/index3.html'
+    context_object_name = 'roster_list'
+
+    def get_queryset(self):
+        return Roster.objects.all()
 
 
 class CharacterView(DetailView):
@@ -30,11 +40,12 @@ class WeaponView(DetailView):
     template_name = 'wh_info/weapon.html'
     context_object_name = 'weapon'
 
-class MainView(DetailView):
-    model = Weapon
-    template_name = 'wh_info/main.html'
-    context_object_name = 'main'
+
+class RosterView(DetailView):
+    model = Roster
+    template_name = 'wh_info/roster.html'
+    context_object_name = 'roster'
 
 
-
-
+def main_view(request):
+    return render(request, 'wh_info/main.html')
