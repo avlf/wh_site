@@ -7,13 +7,13 @@
 <body>
     {% if roster_list %}
     <ul>
-        {% for char in roster_list%}
-        <li><a href="{% url 'wh_info:roster' char.id %}">{{ roster.name }}</a></li>
+        {% for roster in roster_list%}
+        <li><a href="{% url 'wh_info:roster' roster.id %}">{{ roster.name }}</a></li>
         {% endfor%}
     </ul>
 {% else %}
     <p>No wh_info are available.</p>
 {% endif %}
-
+<a href="{% url 'wh_info:main' %}">back</a>
 </body>
 </html>

@@ -7,6 +7,19 @@
 <body>
 <h1>Character: {{character.name}}</h1>
 <p>description: {{character.description}}</p>
+<p>stats:</p>
+<table border = 1 >
+    <tr>
+        <td>cost</td>
+        <td>movement</td>
+        <td>weapon skill</td>
+    </tr>
+    <tr>
+        <td>{{character.cost}}</td>
+        <td>{{character.movement}}</td>
+        <td>{{character.weapon_skill}}</td>
+    </tr>
+</table>
 <a href="{% url 'wh_info:index1' %}">back</a>
 </body>
 </html>

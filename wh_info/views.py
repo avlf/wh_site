@@ -5,8 +5,8 @@ from django.views.generic import DetailView
 from .models import Character, Weapon, Roster
 
 
-class IndexView(generic.ListView):
-    template_name = 'wh_info/index.html'
+class IndexView1(generic.ListView):
+    template_name = 'wh_info/index1.html'
     context_object_name = "character_list"
 
     def get_queryset(self):
