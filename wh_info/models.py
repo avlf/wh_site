@@ -1,7 +1,7 @@
 from django.db import models
 from django_jsonform.models.fields import ArrayField
 
-from wh_info.constants import BATTLEFIELD_ROLE_CHOICE
+from wh_info.constants import BATTLEFIELD_ROLE_CHOICE, FRACTION_KEYWORDS, STRATEGEM_TYPES,MISSION_TYPE,MISSION_WIN_TYPE
 
 """class ModelBase:
     base_Character = []
@@ -250,3 +250,49 @@ class Battalion(MinRoster):
 
     class Meta:
         ordering = ('id',)"""
+
+
+class Strategems(models.Model):
+    name = models.CharField(max_length=100)
+    cost = models.IntegerField()
+    type = models.CharField(max_length=100, choices=STRATEGEM_TYPES)
+    fraction = models.CharField(max_length=100, choices=FRACTION_KEYWORDS)
+    disription_first = models.CharField(max_length=100, blank=True)
+    disription_second = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return self.name
+
+class Deployment_Map(models.Model):
+    name = models.CharField(max_length=100)
+    photo = models.ImageField(upload_to='')
+    Deployment_Zone_A = models.IntegerField()
+    Deployment_Zone_b = models.IntegerField()
+    len_center = models.IntegerField()
+    disription = models.CharField(max_length=100, blank=True)
+
+class Rule(models.Model):
+        name = models.CharField(max_length=100)
+        disription = models.CharField(max_length=100, blank=True)
+
+class Mission(models.Model):
+    name = models.CharField(max_length=100)
+    type = models.CharField(max_length=100, choices=MISSION_TYPE)
+    faction_keywords = ArrayField(
+        models.CharField(max_length=100, blank=True),
+        blank=True
+    )
+    First_rule = models.CharField(max_length=100)
+    Tiem_of_code = models.IntegerField()
+    condition_of_win = models.CharField(max_length=100, choices=MISSION_WIN_TYPE)
+    dop_rules =  models.ManyToManyField(
+        Rule,
+        related_name='rule'
+    )
+
+class KeyWords(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+

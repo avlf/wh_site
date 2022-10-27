@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if strategems_list %}
+    <ul>
+        {% for strategems in strategems_list%}
+        <li><a href="{% url 'wh_info:strategems' strategems.id %}">{{ strategems.name }}</a></li>
+        {% endfor%}
+    </ul>
+{% else %}
+    <p>No wh_info are available.</p>
+{% endif %}
+<a href="{% url 'wh_info:main' %}">back</a>
+</body>
+</html>

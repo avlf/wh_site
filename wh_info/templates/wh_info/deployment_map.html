@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <title>{{deployment_map.name}}</title>
+</head>
+<body>
+<h1>deployment_map: {{deployment_map.name}}</h1>
+<p>description: {{deployment_map.description}}</p>
+<div><p>map</p>
+<div> <img src = '{{deployment_map.photo.url}}'></div>
+</div>
+<p>stats:</p>
+<table border = 1 >
+    <tr>
+        <td>Deployment_Zone_A</td>
+        <td>Deployment_Zone_b</td>
+        <td> len_center</td>
+    </tr>
+    <tr>
+        <td>{{deployment_map.Deployment_Zone_A}}</td>
+        <td>{{deployment_map.Deployment_Zone_b}}</td>
+        <td>{{deployment_map.len_center}}</td>
+    </tr>
+</table>
+<a href="{% url 'wh_info:main' %}">back</a>
+</body>
+</html>

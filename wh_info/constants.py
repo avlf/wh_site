@@ -15,3 +15,22 @@ FRACTION_KEYWORDS = (
     ('xeno','ксеносы')
 
 )
+
+STRATEGEM_TYPES = (
+    ('Battle Tactic Stratagem','Battle Tactic Stratagem'),
+    ('Epic Deed Stratagem','Epic Deed Stratagem'),
+    ('Requisition Stratagem','Requisition Stratagem'),
+    ('Strategic Ploy Stratagem','Strategic Ploy Stratagem'),
+    ('Wargear Stratagem','Wargear Stratagem'),
+
+)
+
+MISSION_TYPE =(
+
+
+)
+
+MISSION_WIN_TYPE = (
+
+
+)

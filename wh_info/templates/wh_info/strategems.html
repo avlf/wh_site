@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>strategem: {{strategems.name}}</h1>
+<p>description: {{strategems.description1}}</p>
+<p>description: {{strategems.description2}}</p>
+<table border = 1 >
+    <tr>
+        <td>cost</td>
+        <td>type</td>
+        <td>fraction</td>
+    </tr>
+    <tr>
+        <td>{{strategems.cost}}</td>
+        <td>{{strategems.type}}</td>
+        <td>{{strategems.fraction}}</td>
+    </tr>
+</table>
+<a href="{% url 'wh_info:main' %}">back</a>
+</body>
+</html>

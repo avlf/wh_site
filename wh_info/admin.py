@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Character, Weapon, Roster
+from .models import Character, Weapon, Roster,Strategems,Mission,Rule,Deployment_Map
 
 
 class CharacterAdmin(admin.ModelAdmin):
@@ -18,6 +18,8 @@ class WeaponAdmin(admin.ModelAdmin):
 class RosterAdmin(admin.ModelAdmin):
     filter_horizontal = ('commanders', 'troops', 'elites', 'fast_attacks', 'heavy_supports', 'flyers')
 
+class StrategemsAdmin(admin.ModelAdmin):
+    list_display = ('name', 'cost', 'type', 'fraction', 'disription_first', 'disription_second')
 
 """class MinRosterAdmin(admin.ModelAdmin):
     filter_horizontal = ('commanders','troops','elites','fast_attacks','heavy_supports','flyers')"""
@@ -33,9 +35,23 @@ class RosterAdmin(admin.ModelAdmin):
     )
     list_filter = ('id',)'''
 
+class Deployment_MapAdmin(admin.ModelAdmin):
+    list_display = ('name', 'photo', 'Deployment_Zone_A', 'Deployment_Zone_b', 'len_center', 'disription')
+
+class RuleAdmin(admin.ModelAdmin):
+    list_display = ('name', 'disription')
+
+class MissionAdmin(admin.ModelAdmin):
+    list_display = ('name', 'type',  'First_rule', 'Tiem_of_code', 'condition_of_win')
+
 admin.site.register(Character, CharacterAdmin)
 admin.site.register(Weapon, WeaponAdmin)
 admin.site.register(Roster, RosterAdmin)
 """admin.site.register(MinRoster, MinRosterAdmin)
 admin.site.register(Battalion)
 """
+admin.site.register(Strategems,StrategemsAdmin)
+
+admin.site.register(Deployment_Map,Deployment_MapAdmin)
+admin.site.register(Rule,RuleAdmin)
+admin.site.register(Mission,MissionAdmin)
