@@ -19,6 +19,11 @@ from wh_info.constants import BATTLEFIELD_ROLE_CHOICE, FRACTION_KEYWORDS, STRATE
     def __str__(self):
         return self.base_Character"""
 
+class KeyWords(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 
 class Character(models.Model):
     name = models.CharField(max_length=100)
@@ -51,9 +56,9 @@ class Character(models.Model):
         blank=True
     )
 
-    keywors = ArrayField(
-        models.CharField(max_length=100, blank=True),
-        blank=True
+    keywords = models.ManyToManyField(
+        KeyWords,
+        related_name='keywords'
     )
 
     weapons = models.TextField(max_length=100, blank=True)
@@ -93,7 +98,7 @@ class Roster(models.Model):
     )
     troops = models.ManyToManyField(
         Character,
-        limit_choices_to={"battlefield_role": 'troops'},
+        #limit_choices_to={"battlefield_role": 'troops'},
         related_name='troop'
 
     )
@@ -290,9 +295,5 @@ class Mission(models.Model):
         related_name='rule'
     )
 
-class KeyWords(models.Model):
-    name = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.name
 

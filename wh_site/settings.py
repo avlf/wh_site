@@ -25,7 +25,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_jsonform',
-    'wh_info'
+    'wh_info',
+
 ]
 
 MIDDLEWARE = [
@@ -113,3 +114,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 import os
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL="main"
+LOGIN_URL = 'accounts/login'

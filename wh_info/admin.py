@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Character, Weapon, Roster,Strategems,Mission,Rule,Deployment_Map
+from .models import Character, Weapon, Roster,Strategems,Mission,Rule,Deployment_Map,KeyWords
 
 
 class CharacterAdmin(admin.ModelAdmin):
@@ -8,11 +8,14 @@ class CharacterAdmin(admin.ModelAdmin):
         'name', 'description', 'battlefield_role', 'power_rating', 'unit_composition', 'power_rating', 'cost',
         'movement', 'weapon_skill',
         'ballistic_skill', 'streath', 'tenesity', 'wd', 'leader', 'attack', 'spas_roll', 'wargear', 'abilities',
-        'faction_keywords', 'keywors', 'weapons', 'profile')
+        'faction_keywords', 'weapons', 'profile')
+    filter_horizontal= ('keywords',)
+
 
 
 class WeaponAdmin(admin.ModelAdmin):
     list_display = ('name', 'range', 'type', 'strength', 'armor_penetration', 'damage', 'abilities')
+
 
 
 class RosterAdmin(admin.ModelAdmin):
@@ -44,6 +47,8 @@ class RuleAdmin(admin.ModelAdmin):
 class MissionAdmin(admin.ModelAdmin):
     list_display = ('name', 'type',  'First_rule', 'Tiem_of_code', 'condition_of_win')
 
+class KeywordAdmin(admin.ModelAdmin):
+    pass
 admin.site.register(Character, CharacterAdmin)
 admin.site.register(Weapon, WeaponAdmin)
 admin.site.register(Roster, RosterAdmin)
@@ -55,3 +60,4 @@ admin.site.register(Strategems,StrategemsAdmin)
 admin.site.register(Deployment_Map,Deployment_MapAdmin)
 admin.site.register(Rule,RuleAdmin)
 admin.site.register(Mission,MissionAdmin)
+admin.site.register(KeyWords,KeywordAdmin)
