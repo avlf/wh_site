@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_jsonform',
     'wh_info',
-
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

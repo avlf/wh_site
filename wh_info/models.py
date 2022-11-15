@@ -1,3 +1,4 @@
+from django.core.validators import MaxValueValidator
 from django.db import models
 from django_jsonform.models.fields import ArrayField
 
@@ -29,8 +30,8 @@ class Character(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(max_length=1000, blank=True)
     battlefield_role = models.CharField(max_length=100, choices=BATTLEFIELD_ROLE_CHOICE)
-    power_rating = models.CharField(max_length=100, blank=True)
-    cost = models.CharField(max_length=100, blank=True)
+    power_rating = models.IntegerField(validators=[MaxValueValidator(200)], blank=True)
+    cost = models.IntegerField(validators=[MaxValueValidator(200)], blank=True)
     movement = models.CharField(max_length=100, blank=True)
     weapon_skill = models.CharField(max_length=100, blank=True)
     ballistic_skill = models.CharField(max_length=100, blank=True)
