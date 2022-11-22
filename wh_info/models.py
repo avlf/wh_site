@@ -31,7 +31,7 @@ class Character(models.Model):
     description = models.TextField(max_length=1000, blank=True)
     battlefield_role = models.CharField(max_length=100, choices=BATTLEFIELD_ROLE_CHOICE)
     power_rating = models.IntegerField(validators=[MaxValueValidator(200)], blank=True)
-    cost = models.IntegerField(validators=[MaxValueValidator(200)], blank=True)
+    cost = models.IntegerField(validators=[MaxValueValidator(900)], blank=True)
     movement = models.CharField(max_length=100, blank=True)
     weapon_skill = models.CharField(max_length=100, blank=True)
     ballistic_skill = models.CharField(max_length=100, blank=True)

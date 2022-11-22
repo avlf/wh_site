@@ -2,13 +2,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 
-from . import views, user_views
+from . import views
 
 app_name = 'wh_info'
 
 urlpatterns = [
-                  path('signup/', user_views.SignUpView.as_view(), name='signup'),
-                  path('registration/', user_views.UserCreationView.as_view(), name='registration'),
                   path('character_list/', views.IndexView1.as_view(), name='index1'),
                   path('character/<int:pk>', views.CharacterView.as_view(), name='character'),
                   path('weapon_list/', views.IndexView2.as_view(), name='index2'),

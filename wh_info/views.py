@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 from django.views.generic import DetailView
 
-from .models import Character, Weapon, Roster, Strategems,Rule,Deployment_Map,Mission
+from .models import Character, Weapon, Roster, Strategems, Rule, Deployment_Map, Mission
 
 
 class IndexView1(generic.ListView):
@@ -62,6 +62,7 @@ class StrategemALLView(generic.ListView):
     template_name = 'wh_info/all_strategems.html'
     context_object_name = 'strategems_list'
 
+
 '''------------------------------------------------------------------------------------------------------------'''
 
 
@@ -70,10 +71,12 @@ class RuleView(DetailView):
     template_name = 'wh_info/rule.html'
     context_object_name = 'rule'
 
+
 class DeploymentMapView(DetailView):
     model = Deployment_Map
     template_name = 'wh_info/deployment_map.html'
     context_object_name = 'deployment_map'
+
 
 class MissionView(DetailView):
     model = Mission

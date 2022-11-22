@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     'django_jsonform',
     'wh_info',
     'django_extensions',
+    'users.apps.UsersConfig',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -115,5 +117,7 @@ import os
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-LOGIN_REDIRECT_URL="main"
-LOGIN_URL = 'accounts/login'
+LOGIN_REDIRECT_URL="wh_info:main"
+LOGIN_URL = 'login'
+
+CRISPY_TEMPLATE_PACK='bootstrap4'
