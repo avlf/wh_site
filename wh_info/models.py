@@ -197,7 +197,7 @@ class Battalion(MinRoster):
         related_name='tro5'
     )
     tro6 = models.ForeignKey(
-        Character,
+        Roster,
         on_delete=models.CASCADE,
         limit_choices_to={"battlefield_role": 'troops'},
         null=True,
