@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from django.urls import reverse
 from django.views import generic
-from django.views.generic import DetailView
+from django.views.generic import DetailView, CreateView, UpdateView
 
 from .models import Character, Weapon, Roster, Strategems, Rule, Deployment_Map, Mission
 
@@ -33,6 +34,26 @@ class CharacterView(DetailView):
     model = Character
     template_name = 'wh_info/character.html'
     context_object_name = 'character'
+
+
+class CreateCharacterView(CreateView):
+    model = Character
+    template_name = 'wh_info/create_character.html'
+    fields = '__all__'
+
+    """def get_absolute_url(self):
+        return reverse_lazy(IndexView1)"""
+
+
+
+class UpdateCharacterView(UpdateView):
+    model = Character
+    template_name = 'wh_info/update_character.html'
+    # context_object_name = 'character'
+    fields = '__all__'
+
+    """def get_absolute_url(self):
+        return reverse_lazy(IndexView1)"""
 
 
 class WeaponView(DetailView):

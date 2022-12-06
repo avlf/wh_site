@@ -1,5 +1,6 @@
 from django.core.validators import MaxValueValidator
 from django.db import models
+from django.urls import reverse
 from django_jsonform.models.fields import ArrayField
 
 from users.models import Profile
@@ -47,7 +48,8 @@ class Character(models.Model):
 
     keywords = models.ManyToManyField(
         KeyWords,
-        related_name='keywords'
+        related_name='keywords',
+        blank = True
     )
 
     weapons = models.TextField(max_length=100, blank=True)
@@ -60,6 +62,9 @@ class Character(models.Model):
         stats = {'c': self.cost, 'm': self.movement, 'w': self.weapon_skill, 'b': self.ballistic_skill,
                  's': self.streath}
         return stats
+
+    """def get_success_url(self):
+        return reverse('character_list')"""
 
 
 class Weapon(models.Model):
