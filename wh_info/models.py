@@ -2,29 +2,17 @@ from django.core.validators import MaxValueValidator
 from django.db import models
 from django_jsonform.models.fields import ArrayField
 
-from wh_info.constants import BATTLEFIELD_ROLE_CHOICE, FRACTION_KEYWORDS, STRATEGEM_TYPES,MISSION_TYPE,MISSION_WIN_TYPE
+from users.models import Profile
+from wh_info.constants import BATTLEFIELD_ROLE_CHOICE, FRACTION_KEYWORDS, STRATEGEM_TYPES, MISSION_TYPE, \
+    MISSION_WIN_TYPE
 
-"""class ModelBase:
-    base_Character = []
-    pub_data = models.DateTimeField('date published')
-
-    @admin.display(
-        boolean=True,
-        ordering='pub_date',
-        description='Published recently?',
-    )
-    def was_published_recently(self):
-        now = timezone.now()
-        return now - datetime.timedelta(days=1) <= self.pub_data <= now
-
-    def __str__(self):
-        return self.base_Character"""
 
 class KeyWords(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
+
 
 class Character(models.Model):
     name = models.CharField(max_length=100)
@@ -68,9 +56,6 @@ class Character(models.Model):
     def __str__(self):
         return self.name
 
-    '''def get_absolut_url(self):
-        return reverse('character', args=[self.pk])'''
-
     def showStats(self):
         stats = {'c': self.cost, 'm': self.movement, 'w': self.weapon_skill, 'b': self.ballistic_skill,
                  's': self.streath}
@@ -92,6 +77,13 @@ class Weapon(models.Model):
 
 class Roster(models.Model):
     name = models.CharField('Roster name', max_length=100)
+    profile = models.ForeignKey(
+        Profile,
+        on_delete=models.CASCADE,
+        verbose_name='Пользователь',
+        related_name='user_roster',
+        null=True,
+    )
     commanders = models.ManyToManyField(
         Character,
         limit_choices_to={"battlefield_role": 'commander'},
@@ -99,7 +91,7 @@ class Roster(models.Model):
     )
     troops = models.ManyToManyField(
         Character,
-        #limit_choices_to={"battlefield_role": 'troops'},
+        # limit_choices_to={"battlefield_role": 'troops'},
         related_name='troop'
 
     )
@@ -133,129 +125,6 @@ class Roster(models.Model):
 
     def __str__(self):
         return self.name
-
-
-"""class MinRoster(models.Model):
-    commanders = models.ManyToManyField(
-        Character,
-        limit_choices_to={"battlefield_role": 'commander'},
-        related_name='commander'
-    )
-    troops = models.ManyToManyField(
-        Character,
-        limit_choices_to={"battlefield_role": 'troops'},
-        related_name='troop'
-
-    )
-    elites = models.ManyToManyField(
-        Character,
-        limit_choices_to={"battlefield_role": 'elite'},
-        blank=True,
-        related_name='elite'
-    )
-
-    fast_attacks = models.ManyToManyField(
-        Character,
-        limit_choices_to={"battlefield_role": 'fast_attack'},
-        blank=True,
-        related_name='fast_attack'
-    )
-
-    heavy_supports = models.ManyToManyField(
-        Character,
-        limit_choices_to={"battlefield_role": 'heavy_support'},
-        blank=True,
-        related_name='heavy_support'
-    )
-
-    flyers = models.ManyToManyField(
-        Character,
-        limit_choices_to={"battlefield_role": 'flyers'},
-        blank=True,
-        related_name='flyer'
-    )
-
-
-class Battalion(MinRoster):
-    com3 = models.ForeignKey(
-        Character,
-        on_delete=models.CASCADE,
-        limit_choices_to={"battlefield_role": 'commander'},
-        related_name='com3'
-    )
-    tro4 = models.ForeignKey(
-        Character,
-        on_delete=models.CASCADE,
-        limit_choices_to={"battlefield_role": 'troops'},
-        related_name='tro4'
-
-    )
-    tro5 = models.ForeignKey(
-        Character,
-        on_delete=models.CASCADE,
-        limit_choices_to={"battlefield_role": 'troops'},
-        related_name='tro5'
-    )
-    tro6 = models.ForeignKey(
-        Roster,
-        on_delete=models.CASCADE,
-        limit_choices_to={"battlefield_role": 'troops'},
-        null=True,
-        blank=True,
-        related_name='tro6'
-    )
-    elite3 = models.ForeignKey(
-        Character,
-        on_delete=models.CASCADE,
-        limit_choices_to={"battlefield_role": 'elite'},
-        null=True,
-        blank=True,
-        related_name='elite3'
-    )
-    elite4 = models.ForeignKey(
-        Character,
-        on_delete=models.CASCADE,
-        limit_choices_to={"battlefield_role": 'elite'},
-        null=True,
-        blank=True,
-        related_name='elite4'
-    )
-    elite5 = models.ForeignKey(
-        Character,
-        on_delete=models.CASCADE,
-        limit_choices_to={"battlefield_role": 'elite'},
-        null=True,
-        blank=True,
-        related_name='elite5'
-    )
-    elite6 = models.ForeignKey(
-        Character,
-        on_delete=models.CASCADE,
-        limit_choices_to={"battlefield_role": 'elite'},
-        null=True,
-        blank=True,
-        related_name='elite6'
-    )
-    fast_attack3 = models.ForeignKey(
-        Character,
-        on_delete=models.CASCADE,
-        limit_choices_to={"battlefield_role": 'fast_attack'},
-        null=True,
-        blank=True,
-        related_name='fast_attack3'
-    )
-
-    heavy_support3 = models.ForeignKey(
-        Character,
-        on_delete=models.CASCADE,
-        limit_choices_to={"battlefield_role": 'heavy_support'},
-        null=True,
-        blank=True,
-        related_name='heavy_support3'
-    )
-
-    class Meta:
-        ordering = ('id',)"""
 
 
 class Strategems(models.Model):
@@ -269,6 +138,7 @@ class Strategems(models.Model):
     def __str__(self):
         return self.name
 
+
 class Deployment_Map(models.Model):
     name = models.CharField(max_length=100)
     photo = models.ImageField(upload_to='')
@@ -277,9 +147,11 @@ class Deployment_Map(models.Model):
     len_center = models.IntegerField()
     disription = models.CharField(max_length=100, blank=True)
 
+
 class Rule(models.Model):
-        name = models.CharField(max_length=100)
-        disription = models.CharField(max_length=100, blank=True)
+    name = models.CharField(max_length=100)
+    disription = models.CharField(max_length=100, blank=True)
+
 
 class Mission(models.Model):
     name = models.CharField(max_length=100)
@@ -291,10 +163,7 @@ class Mission(models.Model):
     First_rule = models.CharField(max_length=100)
     Tiem_of_code = models.IntegerField()
     condition_of_win = models.CharField(max_length=100, choices=MISSION_WIN_TYPE)
-    dop_rules =  models.ManyToManyField(
+    dop_rules = models.ManyToManyField(
         Rule,
         related_name='rule'
     )
-
-
-
