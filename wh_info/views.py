@@ -39,7 +39,10 @@ class CharacterView(DetailView):
 class CreateCharacterView(CreateView):
     model = Character
     template_name = 'wh_info/create_character.html'
-    fields = '__all__'
+    fields = ('name', 'description', 'battlefield_role', 'power_rating', 'unit_composition', 'power_rating', 'cost',
+        'movement', 'weapon_skill',
+        'ballistic_skill', 'streath', 'tenesity', 'wd', 'leader', 'attack', 'spas_roll', 'wargear', 'abilities',
+        'faction_keywords', 'weapons', 'profile')
 
     """def get_absolute_url(self):
         return reverse_lazy(IndexView1)"""
@@ -50,7 +53,10 @@ class UpdateCharacterView(UpdateView):
     model = Character
     template_name = 'wh_info/update_character.html'
     # context_object_name = 'character'
-    fields = '__all__'
+    fields = ('name', 'description', 'battlefield_role', 'power_rating', 'unit_composition', 'power_rating', 'cost',
+        'movement', 'weapon_skill',
+        'ballistic_skill', 'streath', 'tenesity', 'wd', 'leader', 'attack', 'spas_roll', 'wargear', 'abilities',
+        'faction_keywords', 'weapons', 'profile')
 
     """def get_absolute_url(self):
         return reverse_lazy(IndexView1)"""

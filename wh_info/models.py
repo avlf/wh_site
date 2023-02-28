@@ -3,7 +3,7 @@ from django.db import models
 from django.urls import reverse
 from django_jsonform.models.fields import ArrayField
 
-from users.models import Profile
+from users.models import User
 from wh_info.constants import BATTLEFIELD_ROLE_CHOICE, FRACTION_KEYWORDS, STRATEGEM_TYPES, MISSION_TYPE, \
     MISSION_WIN_TYPE
 
@@ -83,7 +83,7 @@ class Weapon(models.Model):
 class Roster(models.Model):
     name = models.CharField('Roster name', max_length=100)
     profile = models.ForeignKey(
-        Profile,
+        User,
         on_delete=models.CASCADE,
         verbose_name='Пользователь',
         related_name='user_roster',
